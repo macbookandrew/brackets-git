@@ -5,6 +5,9 @@ module.exports = function (grunt) {
         jslint: {
             all: {
                 src: ["*.js", "src/**/*.js", "nls/**/*.js"],
+                options: {
+                    lintPath: "thirdparty/jslint.js"
+                },
                 directives: {
                     "node": true,
                     "nomen": true,
