@@ -6,7 +6,7 @@ module.exports = function (grunt) {
             all: {
                 src: ["*.js", "src/**/*.js", "nls/**/*.js"],
                 options: {
-                    lintPath: "thirdparty/jslint.js"
+                    edition: "thirdparty/jslint.js"
                 },
                 directives: {
                     "node": true,
