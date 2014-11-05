@@ -12,16 +12,39 @@ on run argv
 
     if doesExist
     
-        tell application "iterm"
-            set myterm to (make new terminal)
-            tell myterm
-                launch session "Default session"
-                tell the last session
-                    set name to dir
-                    write text "cd " & dir
+        tell application "System Events"
+            if "iTerm" is not in name of processes then
+                launch application "iTerm"
+
+                tell process "iTerm"
+                    set frontmost to true
                 end tell
-            end tell
+
+                set new_cmd to 1
+            end if
         end tell
+
+        tell application "iTerm"
+            if (new_cmd) is 1 then
+                make new terminal
+                tell the current terminal
+                    activate current session
+                    launch session "Default Session"
+                    tell the last session
+                        write text "cd " & dir
+                    end tell
+                end tell
+            else
+                activate
+                tell the current terminal
+                    activate current session
+                    tell the last session
+                        write text "cd " & dir & "; clear; pwd"
+                    end tell
+                end tell
+            end if
+        end tell
+        do shell script "echo ok"
 
     else
     
